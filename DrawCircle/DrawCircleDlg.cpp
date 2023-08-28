@@ -202,6 +202,8 @@ void CDrawCircleDlg::UpdateDisplay()
 
 void CDrawCircleDlg::moveRect()
 {
+	static int nSttX = 0;
+	static int nSttY = 0;
 
 	int nGray = 120;
 
@@ -215,13 +217,15 @@ void CDrawCircleDlg::moveRect()
 	memset(fm, 0xff, nWidth*nHeight);
 
 	//size of small rectangle 48*64
-	for (int j = 0; j < 48; j++)
+	for (int j = nSttY; j < nSttY + 48; j++)
 	{
-		for (int i = 0; i < 64; i++)
+		for (int i = nSttX; i < nSttX + 64; i++)
 		{
 			fm[j*nPitch + i] = nGray;
 		}
 	}
+	nSttX++;
+	nSttY++;
 
 	UpdateDisplay();
 }
