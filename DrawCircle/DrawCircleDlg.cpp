@@ -190,7 +190,11 @@ void CDrawCircleDlg::OnBnClickedButtonOn()
 
 void CDrawCircleDlg::OnBnClickedButtonAction()
 {
-	moveRect();
+	for (int i = 0; i < 100; i++)
+	{
+		moveRect();
+		Sleep(10);
+	}
 }
 
 void CDrawCircleDlg::UpdateDisplay()
