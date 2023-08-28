@@ -254,15 +254,7 @@ void CDrawCircleDlg::moveCircle()
 
 	memset(fm, 0xff, nWidth*nHeight);
 
-	for (int j = nSttY; j < nSttY + 48; j++)
-	{
-		for (int i = nSttX; i < nSttX + 64; i++)
-		{
-			drawCircle(fm, nSttX, nSttY, nRadius, nGray);
-		}
-	}
-	nSttX++;
-	nSttY++;
+	drawCircle(fm, nSttX++, nSttY++, nRadius, nGray);
 
 	UpdateDisplay();
 }
