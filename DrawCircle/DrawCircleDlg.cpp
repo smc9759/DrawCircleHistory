@@ -225,7 +225,8 @@ void CDrawCircleDlg::moveRect()
 	{
 		for (int i = nSttX; i < nSttX + 64; i++)
 		{
-			fm[j*nPitch + i] = nGray;
+			if(validImgPos(i,j))
+				fm[j*nPitch + i] = nGray;
 		}
 	}
 	nSttX++;
