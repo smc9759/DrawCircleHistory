@@ -43,5 +43,6 @@ public:
 	void	moveRect();
 	void	moveCircle();
 	void drawCircle(unsigned char* fm, int i, int j, int nRadius, int nGray);
+	BOOL IsInCircle(int i, int j, int nCenterX, int nCenterY, int nRadius);
 
 };

@@ -258,7 +258,7 @@ void CDrawCircleDlg::moveCircle()
 	{
 		for (int i = nSttX; i < nSttX + 64; i++)
 		{
-			drawCircle(fm, i, j, nRadius, nGray);
+			drawCircle(fm, nSttX, nSttY, nRadius, nGray);
 		}
 	}
 	nSttX++;
@@ -290,8 +290,23 @@ void CDrawCircleDlg::drawCircle(unsigned char* fm, int x, int y, int nRadius, in
 
 	for (int j = y; j < y + nRadius * 2; j++) {
 		for (int i = x; i < x + nRadius * 2; i++) {
-			//if (IsInCircle(i, j, nCenterX, nCenterY, nRadius))
+			if (IsInCircle(i, j, nCenterX, nCenterY, nRadius))
 				fm[j*nPitch + i] = nGray;
 		}
 	}
+}
+
+BOOL CDrawCircleDlg::IsInCircle(int i, int j, int nCenterX, int nCenterY, int nRadius)
+{
+	bool bRet = false;
+
+	double dX = i - nCenterX;
+	double dY = j - nCenterY;
+	double dDist = dX * dX + dY * dY;
+
+	if (dDist < nRadius*nRadius) {
+		bRet = true;
+	}
+
+	return bRet;
 }
