@@ -65,6 +65,7 @@ BEGIN_MESSAGE_MAP(CDrawCircleDlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDC_BUTTON_ON, &CDrawCircleDlg::OnBnClickedButtonOn)
+	ON_BN_CLICKED(IDC_BUTTON_ACTION, &CDrawCircleDlg::OnBnClickedButtonAction)
 END_MESSAGE_MAP()
 
 
@@ -205,3 +206,12 @@ void CDrawCircleDlg::OnBnClickedButtonOn()
 
 	m_image.Save(_T("c:\\image\\save.bmp"));
 }
+
+
+
+void CDrawCircleDlg::OnBnClickedButtonAction()
+{
+	//moveRect();
+}
+
+
