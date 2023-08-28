@@ -192,7 +192,8 @@ void CDrawCircleDlg::OnBnClickedButtonAction()
 {
 	for (int i = 0; i < 100; i++)
 	{
-		moveRect();
+		//moveRect();
+		moveCircle();
 		Sleep(10);
 	}
 }
@@ -225,7 +226,7 @@ void CDrawCircleDlg::moveRect()
 	{
 		for (int i = nSttX; i < nSttX + 64; i++)
 		{
-			//drawCircle(fm,i,j,nRadius, nGray);
+			drawCircle(fm, i, j, nRadius, nGray);
 			//if(validImgPos(i,j))
 				//fm[j*nPitch + i] = nGray;
 		}
@@ -235,6 +236,38 @@ void CDrawCircleDlg::moveRect()
 
 	UpdateDisplay();
 }
+
+
+void CDrawCircleDlg::moveCircle()
+{
+	static int nSttX = 0;
+	static int nSttY = 0;
+
+	int nGray = 120;
+
+	//Get 함수를 써서 가져오는게 효율적이다. 
+	int nWidth = m_image.GetWidth();
+	int nHeight = m_image.GetHeight();
+	int nPitch = m_image.GetPitch();
+	int nRadius = 5;
+	unsigned char* fm = (unsigned char*)m_image.GetBits();
+
+	memset(fm, 0xff, nWidth*nHeight);
+
+	for (int j = nSttY; j < nSttY + 48; j++)
+	{
+		for (int i = nSttX; i < nSttX + 64; i++)
+		{
+			drawCircle(fm, i, j, nRadius, nGray);
+		}
+	}
+	nSttX++;
+	nSttY++;
+
+	UpdateDisplay();
+}
+
+
 
 BOOL CDrawCircleDlg::validImgPos(int x, int y) {
 
@@ -247,4 +280,18 @@ BOOL CDrawCircleDlg::validImgPos(int x, int y) {
 	//이 좌표가 이 영역에 들어가는가 Point in REct
 	return rect.PtInRect(CPoint(x, y));
 
+}
+
+void CDrawCircleDlg::drawCircle(unsigned char* fm, int x, int y, int nRadius, int nGray)
+{
+	int nCenterX = x + nRadius;
+	int nCenterY = y + nRadius;
+	int nPitch = m_image.GetPitch();
+
+	for (int j = y; j < y + nRadius * 2; j++) {
+		for (int i = x; i < x + nRadius * 2; i++) {
+			//if (IsInCircle(i, j, nCenterX, nCenterY, nRadius))
+				fm[j*nPitch + i] = nGray;
+		}
+	}
 }
