@@ -34,6 +34,7 @@ protected:
 
 private:
 	CImage	m_image;
+	BOOL	validImgPos(int x, int y);
 
 public:
 	afx_msg void OnBnClickedButtonOn();

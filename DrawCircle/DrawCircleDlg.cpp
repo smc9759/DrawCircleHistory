@@ -233,3 +233,16 @@ void CDrawCircleDlg::moveRect()
 
 	UpdateDisplay();
 }
+
+BOOL CDrawCircleDlg::validImgPos(int x, int y) {
+
+	BOOL bRet = false;
+	int nWidth = m_image.GetWidth();
+	int nHeight = m_image.GetHeight();
+
+	//MFC 특정 영역에 대한 정보
+	CRect rect(0, 0, nWidth, nHeight);
+	//이 좌표가 이 영역에 들어가는가 Point in REct
+	return rect.PtInRect(CPoint(x, y));
+
+}
