@@ -252,7 +252,7 @@ void CDrawCircleDlg::moveCircle()
 	int nRadius = 5;
 	unsigned char* fm = (unsigned char*)m_image.GetBits();
 
-	memset(fm, 0xff, nWidth*nHeight);
+	//memset(fm, 0xff, nWidth*nHeight);
 
 	drawCircle(fm, nSttX++, nSttY++, nRadius, nGray);
 
