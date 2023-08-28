@@ -41,5 +41,6 @@ public:
 	afx_msg void OnBnClickedButtonAction();
 	void	UpdateDisplay();
 	void	moveRect();
+	void drawCircle(unsigned char* fm, int i, int j, int nRadius, int nGray);
 
 };
