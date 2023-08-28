@@ -180,27 +180,6 @@ void CDrawCircleDlg::OnBnClickedButtonOn()
 
 	memset(fm, 0xff, nWidth*nHeight);
 
-	//for (int j = 0; j < nHeight; j++)
-	//{
-	//	for (int i = 0; i < nWidth; i++)
-	//	{
-	//		fm[j*nPitch + i] = (i % 0xff);
-	//	}
-	//}
-
-	/*fm[12 * nPitch + 16] = 0;
-	fm[0 * nPitch + 0] = 120;
-	fm[0 * nPitch + 1] = 128;
-	*/
-
-	//for (int j = 0; j < nHeight/2; j++)
-	//{
-	//	for (int i = 0; i < nWidth/2; i++)
-	//	{
-	//		fm[j*nPitch + i] = 128;
-	//	}
-	//}
-
 	CClientDC dc(this);
 	m_image.Draw(dc, 0, 0);
 
@@ -211,7 +190,7 @@ void CDrawCircleDlg::OnBnClickedButtonOn()
 
 void CDrawCircleDlg::OnBnClickedButtonAction()
 {
-	//moveRect();
+	moveRect();
 }
 
 void CDrawCircleDlg::UpdateDisplay()
@@ -221,3 +200,28 @@ void CDrawCircleDlg::UpdateDisplay()
 
 }
 
+void CDrawCircleDlg::moveRect()
+{
+
+	int nGray = 120;
+
+	//Get 함수를 써서 가져오는게 효율적이다. 
+	int nWidth = m_image.GetWidth();
+	int nHeight = m_image.GetHeight();
+	int nPitch = m_image.GetPitch();
+	int nRadius = 5;
+	unsigned char* fm = (unsigned char*)m_image.GetBits();
+
+	memset(fm, 0xff, nWidth*nHeight);
+
+	//size of small rectangle 48*64
+	for (int j = 0; j < 48; j++)
+	{
+		for (int i = 0; i < 64; i++)
+		{
+			fm[j*nPitch + i] = nGray;
+		}
+	}
+
+	UpdateDisplay();
+}
