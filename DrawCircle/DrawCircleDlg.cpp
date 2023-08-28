@@ -64,6 +64,7 @@ BEGIN_MESSAGE_MAP(CDrawCircleDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
+	ON_BN_CLICKED(IDC_BUTTON_ON, &CDrawCircleDlg::OnBnClickedButtonOn)
 END_MESSAGE_MAP()
 
 
@@ -152,3 +153,55 @@ HCURSOR CDrawCircleDlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
+
+
+void CDrawCircleDlg::OnBnClickedButtonOn()
+{
+	int nWidth = 640;
+	int nHeight = 480;
+	int nBpp = 8;
+
+	if (m_image != NULL) {
+		m_image.Destroy();
+	}
+	m_image.Create(nWidth, -nHeight, nBpp);
+	//lookup table
+	if (nBpp == 8)
+	{
+		static RGBQUAD rgb[256];
+		for (int i = 0; i < 256; i++)
+			rgb[i].rgbRed = rgb[i].rgbGreen = rgb[i].rgbBlue = i;
+		m_image.SetColorTable(0, 256, rgb);
+	}
+
+	int nPitch = m_image.GetPitch();
+	unsigned char* fm = (unsigned char*)m_image.GetBits();
+
+	memset(fm, 0xff, nWidth*nHeight);
+
+	//for (int j = 0; j < nHeight; j++)
+	//{
+	//	for (int i = 0; i < nWidth; i++)
+	//	{
+	//		fm[j*nPitch + i] = (i % 0xff);
+	//	}
+	//}
+
+	/*fm[12 * nPitch + 16] = 0;
+	fm[0 * nPitch + 0] = 120;
+	fm[0 * nPitch + 1] = 128;
+	*/
+
+	//for (int j = 0; j < nHeight/2; j++)
+	//{
+	//	for (int i = 0; i < nWidth/2; i++)
+	//	{
+	//		fm[j*nPitch + i] = 128;
+	//	}
+	//}
+
+	CClientDC dc(this);
+	m_image.Draw(dc, 0, 0);
+
+	m_image.Save(_T("c:\\image\\save.bmp"));
+}
