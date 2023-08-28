@@ -214,4 +214,10 @@ void CDrawCircleDlg::OnBnClickedButtonAction()
 	//moveRect();
 }
 
+void CDrawCircleDlg::UpdateDisplay()
+{
+	CClientDC dc(this);
+	m_image.Draw(dc, 0, 0);
+
+}
 

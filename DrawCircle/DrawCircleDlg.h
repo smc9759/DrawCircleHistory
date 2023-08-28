@@ -37,4 +37,7 @@ private:
 
 public:
 	afx_msg void OnBnClickedButtonOn();
+	afx_msg void OnBnClickedButtonAction();
+	void	UpdateDisplay();
+
 };
